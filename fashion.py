@@ -41,11 +41,11 @@ network = keras.Sequential([
     keras.layers.Dense(10, activation=tf.nn.softmax)
 ])
 
-network.compile(optimizer=tf.train.AdamOptimizer(), 
+network.compile(optimizer=keras.optimizers.Adam(), 
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-network.fit(train_images, train_labels, epochs=10)
+network.fit(train_images, train_labels, epochs=3)
 
 preds = network.predict(test_images)
 results = []
@@ -65,3 +65,5 @@ for i in range(len(results)):
         matches += 1
 
 print("Accuracy: %d %%" % (matches/len(results)*100))
+
+network.save("fashion_network.h5")
